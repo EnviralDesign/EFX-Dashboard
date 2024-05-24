@@ -1,2 +1,5 @@
 
 .DS_Store
+/webapp/__pycache__
+/webapp/.git
+/webapp/.gitignore
