@@ -14,13 +14,16 @@ st.markdown(f"You are currently logged in with the role of {st.session_state.rol
 # Path to the .tsv file in the root directory
 file_path = 'data.tsv'
 
-# try:
 # Load the data
 df = load_data(file_path)
+
+print("==================")
 
 # Extract the date range
 min_date = pd.to_datetime(df['ServerCloseTime'], format='%d-%m-%Y %H:%M:%S').min()
 max_date = pd.to_datetime(df['ServerCloseTime'], format='%d-%m-%Y %H:%M:%S').max()
+# min_date = pd.to_datetime(df['ServerCloseTime'], format='%d-%m-%Y').min()
+# max_date = pd.to_datetime(df['ServerCloseTime'], format='%d-%m-%Y').max()
 
 # Convert 'ServerCloseTime' to datetime
 df['ServerCloseTime'] = pd.to_datetime(df['ServerCloseTime'], format='%d-%m-%Y %H:%M:%S')
@@ -42,7 +45,6 @@ with col2:
 
 # Adjust end_date to include the entire day
 end_date = pd.to_datetime(end_date) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
-
 # Filter the data based on the selected date range
 filtered_df = df[(df['ServerCloseTime'] >= pd.to_datetime(start_date)) & (df['ServerCloseTime'] <= end_date)]
 
@@ -51,10 +53,4 @@ styled_df = style_dataframe(filtered_df)
 
 # Use st.container to make the table fully wide
 with st.container():
-    st.write(styled_df, use_container_width=True)
-        
-# except FileNotFoundError:
-#     st.error(f"The file {file_path} was not found.")
-# except Exception as e:
-#     st.error(f"An error occurred while loading the file: {e}")
-#     st.error(traceback.format_exc())
+    st.dataframe(styled_df, use_container_width=True)
