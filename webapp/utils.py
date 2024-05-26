@@ -29,6 +29,11 @@ def load_data(file_path):
     
     return data
 
+def filter_trades_by_time(df, start_time, end_time):
+    """Filter the DataFrame to remove trades opened outside the specified time window."""
+    filtered_df = df[(df['ServerOpenTime'] >= start_time) & (df['ServerOpenTime'] <= end_time)]
+    return filtered_df
+
 def format_currency(val):
     pass
     return val
@@ -100,7 +105,10 @@ def load_config():
     """Load the JSON configuration from the config file."""
     config_path = os.path.join('data', 'config.json')
     with open(config_path, 'r') as config_file:
-        return json.load(config_file)
+        config = json.load(config_file)
+        config['start-date'] = pd.to_datetime(config['start-date'])
+        config['end-date'] = pd.to_datetime(config['end-date'])
+        return config
 
 def calculate_net_profit_sum(filtered_df):
     """Calculate the sum of net profits for a given trade group."""
