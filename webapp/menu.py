@@ -5,11 +5,11 @@ def authenticated_menu():
     # Show a navigation menu for authenticated users
     st.sidebar.page_link("app.py", label="Switch accounts")
     if st.session_state.role in ["user"]:
-        st.sidebar.page_link("pages/user/overview.py", label="Overview")
-        st.sidebar.page_link("pages/user/data.py", label="Data")
-        st.sidebar.page_link("pages/user/settings.py", label="Settings")
+        st.sidebar.page_link("pages/user_overview.py", label="Overview")
+        st.sidebar.page_link("pages/user_data.py", label="Data")
+        st.sidebar.page_link("pages/user_settings.py", label="Settings")
     if st.session_state.role in ["admin"]:
-        st.sidebar.page_link("pages/admin/admin.py", label="Manage users")
+        st.sidebar.page_link("pages/admin.py", label="Manage users")
 
 
 def unauthenticated_menu():

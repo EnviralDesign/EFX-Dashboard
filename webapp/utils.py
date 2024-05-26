@@ -3,7 +3,7 @@ import io
 
 def load_data(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
-        print("File encoding: utf-8")
+        # print("File encoding: utf-8")
         tsv_string = file.read()
     
     # Split the string by the custom header separator and take the second part

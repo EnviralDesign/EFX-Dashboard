@@ -8,7 +8,7 @@ from utils import load_data, format_currency, color_net_profit, style_dataframe
 # Redirect to app.py if not logged in, otherwise show the navigation menu
 menu_with_redirect()
 
-st.title("User Home Page")
+st.title("Overview")
 st.markdown(f"Welcome to your home page! You are currently logged in with the role of {st.session_state.role}.")
 
 # Path to the .tsv file in the root directory
@@ -17,7 +17,7 @@ file_path = 'data.tsv'
 # Load the data
 df = load_data(file_path)
 
-print("==================")
+# print("==================")
 
 # Extract the date range
 min_date = pd.to_datetime(df['ServerCloseTime'], format='%d-%m-%Y %H:%M:%S').min()
