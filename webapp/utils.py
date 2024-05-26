@@ -1,5 +1,7 @@
 import pandas as pd
 import io
+import os
+import json
 
 def load_data(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -24,6 +26,8 @@ def load_data(file_path):
     data['Swap'] = pd.to_numeric(data['Swap'])
     
     return data
+
+def format_currency(val):
 
 def style_dataframe(df):
     """Apply styling and formatting to the DataFrame."""
