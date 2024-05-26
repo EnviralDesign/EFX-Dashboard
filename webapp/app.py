@@ -7,6 +7,10 @@ st.set_page_config(layout="wide")  # Set the page layout to wide
 if "role" not in st.session_state:
     st.session_state.role = None
 
+# Temporary override to always load as user
+if st.session_state.role is None:
+    st.session_state.role = "user"
+
 # Retrieve the role from Session State to initialize the widget
 st.session_state._role = st.session_state.role
 
