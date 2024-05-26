@@ -101,9 +101,8 @@ def load_config():
     with open(config_path, 'r') as config_file:
         return json.load(config_file)
 
-def calculate_net_profit_sum(df, comment_filter, magic_filter):
+def calculate_net_profit_sum(filtered_df):
     """Calculate the sum of net profits for a given trade group."""
-    filtered_df = df[(df['Comment'].str.contains(comment_filter)) & (df['MagicNumber'] == magic_filter)]
     return filtered_df['NetProfit'].sum()
 
 def color_net_profit(val, pos_rgb=(0, 255, 128), neg_rgb=(255, 0, 128)):
