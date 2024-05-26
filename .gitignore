@@ -3,3 +3,4 @@
 /webapp/__pycache__
 /webapp/.git
 /webapp/.gitignore
+.aider*

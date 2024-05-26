@@ -31,7 +31,7 @@ def style_dataframe(df):
     styled_df = df.copy()
 
     # Format the NetProfit column as currency
-    if(True):
+    if(False):
         styled_df['NetProfit'] = styled_df['NetProfit'].apply(format_currency)
     
     # Apply color formatting to the NetProfit column
