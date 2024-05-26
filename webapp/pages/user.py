@@ -8,8 +8,8 @@ from utils import load_data, format_currency, color_net_profit, style_dataframe
 # Redirect to app.py if not logged in, otherwise show the navigation menu
 menu_with_redirect()
 
-st.title("This page is available to all users")
-st.markdown(f"You are currently logged in with the role of {st.session_state.role}.")
+st.title("User Home Page")
+st.markdown(f"Welcome to your home page! You are currently logged in with the role of {st.session_state.role}.")
 
 # Path to the .tsv file in the root directory
 file_path = 'data.tsv'
