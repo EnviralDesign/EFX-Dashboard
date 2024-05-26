@@ -2,6 +2,7 @@ import pandas as pd
 import io
 import os
 import json
+import re
 
 def load_data(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -47,6 +48,52 @@ def style_dataframe(df):
         )
     return styled_df
 
+
+def parse_magic_number_pattern(pattern):
+    """ Convert a pattern like '1000-1004' or '100,101,103' into a regex pattern for exact matches. """
+    if not pattern:
+        return None  # Return None if the pattern is empty
+    ranges = []
+    items = pattern.split(',')
+    for item in items:
+        if '-' in item:
+            start, end = item.split('-')
+            range_regex = '|'.join(str(x) for x in range(int(start), int(end)+1))
+            ranges.append(range_regex)
+        else:
+            ranges.append(r'\b' + re.escape(item) + r'\b')
+    return '|'.join(ranges)
+
+def wildcard_to_regex(pattern):
+    """ Convert multiple wildcard patterns to a regex pattern, ensure non-empty matches if not explicitly wild. """
+    if not pattern:
+        return ".*"  # Match everything if comment is empty
+    patterns = pattern.split(';')  # Split multiple patterns using ';'
+    regex_patterns = []
+    for pat in patterns:
+        if pat:  # Ensure we do not create regex for empty patterns
+            pat = re.escape(pat)
+            pat = pat.replace(r'\*', '.*')
+            pat = pat.replace(r'\?', '.')
+            regex_patterns.append(f"^{pat}$")
+    if regex_patterns:
+        return '|'.join(regex_patterns)
+    return "$^"  # This regex matches nothing, used if all patterns are empty
+
+def filter_dataframe(df, magic_filter, comment_filter):
+    """Filter the DataFrame based on magic number and comment filters."""
+    magic_regex = parse_magic_number_pattern(magic_filter) if magic_filter else None
+    comment_regex = wildcard_to_regex(comment_filter)
+
+    filtered_df = df.copy()
+
+    if magic_regex:
+        filtered_df = filtered_df[filtered_df['MagicNumber'].astype(str).str.match(magic_regex)]
+
+    if comment_regex:
+        filtered_df = filtered_df[filtered_df['Comment'].str.match(comment_regex)]
+
+    return filtered_df
 
 def load_config():
     """Load the JSON configuration from the config file."""
