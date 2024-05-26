@@ -28,8 +28,6 @@ def load_data(file_path):
     return data
 
 def format_currency(val):
-    """Format the value as currency with two decimal places."""
-    return f"${val:,.2f}"
 
 def style_dataframe(df):
     """Apply styling and formatting to the DataFrame."""
