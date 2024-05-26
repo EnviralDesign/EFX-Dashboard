@@ -28,6 +28,8 @@ def load_data(file_path):
     return data
 
 def format_currency(val):
+    pass
+    return val
 
 def style_dataframe(df):
     """Apply styling and formatting to the DataFrame."""
@@ -44,20 +46,7 @@ def style_dataframe(df):
             lambda val: color_net_profit(float(val.replace('$', '').replace(',', ''))), subset=['NetProfit']
         )
     return styled_df
-    """Apply styling and formatting to the DataFrame."""
 
-    styled_df = df.copy()
-
-    # Format the NetProfit column as currency
-    if(False):
-        styled_df['NetProfit'] = styled_df['NetProfit'].apply(format_currency)
-    
-    # Apply color formatting to the NetProfit column
-    if(False):
-        styled_df = df.style.map(
-            lambda val: color_net_profit(float(val.replace('$', '').replace(',', ''))), subset=['NetProfit']
-        )
-    return styled_df
 
 def load_config():
     """Load the JSON configuration from the config file."""

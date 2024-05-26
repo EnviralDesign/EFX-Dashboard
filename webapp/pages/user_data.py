@@ -3,7 +3,7 @@ import pandas as pd
 import traceback
 from menu import menu_with_redirect
 from datetime import datetime, timedelta, date
-from utils import load_data, format_currency, color_net_profit, style_dataframe
+from utils import load_data, format_currency, color_net_profit, style_dataframe, load_config
 
 # Redirect to app.py if not logged in, otherwise show the navigation menu
 menu_with_redirect()
@@ -13,6 +13,9 @@ st.markdown(f"Welcome to your home page! You are currently logged in with the ro
 
 # Path to the .tsv file in the root directory
 file_path = 'data.tsv'
+
+# Load the config
+config = load_config()
 
 # Load the data
 df = load_data(file_path)
