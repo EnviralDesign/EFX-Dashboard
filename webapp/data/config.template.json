@@ -1,7 +1,7 @@
 {
     "inial-balance": 5000,
-    "start-date": "13-05-2024 00:00:00",
-    "end-date": "31-12-2024 23:59:59",
+    "start-date": "2024-05-13 00:00:00",
+    "end-date": "2024-12-31 23:59:59",
     "trade-groups":[
         {
             "title": "Golden Raven V4.2",
