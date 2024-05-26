@@ -1,3 +1,4 @@
+import streamlit as st
 import pandas as pd
 import io
 import os
@@ -89,9 +90,10 @@ def filter_dataframe(df, magic_filter, comment_filter):
 
     if magic_regex:
         filtered_df = filtered_df[filtered_df['MagicNumber'].astype(str).str.match(magic_regex)]
-
     if comment_regex:
         filtered_df = filtered_df[filtered_df['Comment'].str.match(comment_regex)]
+    st.write(len(filtered_df))
+    st.write(filtered_df)
 
     return filtered_df
 
