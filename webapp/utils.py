@@ -41,7 +41,11 @@ def style_dataframe(df):
         )
     return styled_df
 
-def format_currency(val):
+def load_config():
+    """Load the JSON configuration from the config file."""
+    config_path = os.path.join('data', 'config.json')
+    with open(config_path, 'r') as config_file:
+        return json.load(config_file)
     """Format the value as currency with two decimal places."""
     return f"${val:,.2f}"
 
