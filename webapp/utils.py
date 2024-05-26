@@ -28,8 +28,24 @@ def load_data(file_path):
     return data
 
 def format_currency(val):
+    """Format the value as currency with two decimal places."""
+    return f"${val:,.2f}"
 
 def style_dataframe(df):
+    """Apply styling and formatting to the DataFrame."""
+
+    styled_df = df.copy()
+
+    # Format the NetProfit column as currency
+    if(False):
+        styled_df['NetProfit'] = styled_df['NetProfit'].apply(format_currency)
+    
+    # Apply color formatting to the NetProfit column
+    if(False):
+        styled_df = df.style.map(
+            lambda val: color_net_profit(float(val.replace('$', '').replace(',', ''))), subset=['NetProfit']
+        )
+    return styled_df
     """Apply styling and formatting to the DataFrame."""
 
     styled_df = df.copy()
