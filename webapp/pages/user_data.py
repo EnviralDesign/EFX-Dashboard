@@ -12,7 +12,7 @@ st.title("Overview")
 st.markdown(f"Welcome to your home page! You are currently logged in with the role of {st.session_state.role}.")
 
 # Path to the .tsv file in the root directory
-file_path = 'data.tsv'
+file_path = './data/data.tsv'
 
 # Load the config
 config = load_config()

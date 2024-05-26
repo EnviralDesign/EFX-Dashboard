@@ -1,3 +1,12 @@
 {
-    "key": "value"
+    "inial-balance": 5000,
+    "start-date": "13-05-2024 00:00:00",
+    "end-date": "31-12-2024 23:59:59",
+    "trade-groups": [
+        {
+            "title": "Golden Raven V4.2",
+            "comment-filter": "Golden Raven*",
+            "magic-filter": "123456"
+        }
+    ]
 }

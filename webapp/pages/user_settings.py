@@ -44,12 +44,16 @@ if json_valid:
     # Save the JSON data to config file
     with open(config_path, 'w') as config_file:
         json.dump(json.loads(json_data), config_file, indent=4)
+    # st.success("JSON data saved successfully.")
+    st.toast("JSON data saved successfully.")
 else:
-    st.warning("Invalid JSON. Please correct the errors and try again.")
+    # st.warning("Invalid JSON. Please correct the errors and try again.")
+    st.toast("Invalid JSON. Please correct the errors and try again.")
+
 
 # Display the JSON data
-st.subheader("JSON Output")
-if json_valid:
-    st.json(json.loads(json_data))
-else:
-    st.error("Invalid JSON")
+# st.subheader("JSON Output")
+# if json_valid:
+#     st.json(json.loads(json_data))
+# else:
+#     st.error("Invalid JSON")
