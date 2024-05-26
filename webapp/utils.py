@@ -91,6 +91,7 @@ def filter_dataframe(df, magic_filter, comment_filter):
     if magic_regex:
         filtered_df = filtered_df[filtered_df['MagicNumber'].astype(str).str.match(magic_regex)]
     if comment_regex:
+        filtered_df['Comment'] = filtered_df['Comment'].fillna('')  # Fill NaN values with empty string
         filtered_df = filtered_df[filtered_df['Comment'].str.match(comment_regex)]
     st.write(len(filtered_df))
     st.write(filtered_df)
