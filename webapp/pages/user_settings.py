@@ -29,7 +29,7 @@ with open(config_path, 'r') as config_file:
 
 # JSON Editor
 st.subheader("JSON Editor")
-json_data = st_ace(value=st.session_state.json_data, language='json', theme='monokai', keybinding='vscode', font_size=14, tab_size=4, show_gutter=True, wrap=True)
+json_data = st_ace(value=json.dumps(st.session_state.json_data, indent=4), language='json', theme='monokai', keybinding='vscode', font_size=14, tab_size=4, show_gutter=True, wrap=True)
 
 # Validate JSON
 try:
