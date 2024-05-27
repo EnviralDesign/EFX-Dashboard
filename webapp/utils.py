@@ -60,6 +60,16 @@ def start_and_end_dates(df, optional_start_time='', optional_end_time=''):
 
     return start_date, end_date
 
+def comment_and_magic_filter_strings():
+    # UI for entering the filters
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        comment_filter = st.text_input("Enter comment filter")
+    with col2:
+        magic_filter = st.text_input("Enter magic filter")
+
+    return comment_filter, magic_filter
+
 def parse_magic_number_pattern(pattern):
     """ Convert a pattern like '1000-1004' or '100,101,103' into a regex pattern for exact matches. """
     if not pattern:
@@ -122,9 +132,36 @@ def calculate_net_profit_sum(filtered_df):
     """Calculate the sum of net profits for a given trade group."""
     return filtered_df['NetProfit'].sum()
 
+def calculate_positive_net_profit_sum(filtered_df):
+    """Calculate the sum of positive net profits for a given trade group."""
+    return filtered_df['NetProfit'].clip(lower=0).sum()
+
+def calculate_negative_net_profit_sum(filtered_df):
+    """Calculate the sum of negative net profits for a given trade group."""
+    return filtered_df['NetProfit'].clip(upper=0).sum()
+
+def calculate_profit_factor(profit_sum, loss_sum):
+    """Calculate the profit factor."""
+    return -profit_sum / loss_sum if loss_sum != 0 else 99999
+
+def format_profit_factor(val):
+    """Format the profit factor."""
+    # format the profit factor with 2 decimal places. if the value is 99999, then return the symbol for infinity
+    return '∞' if val == 99999 else f'{val:.2f}'
+
 def color_net_profit(val, pos_rgb=(0, 255, 128), neg_rgb=(255, 0, 128)):
     """Apply color formatting based on the value."""
     pos_color = f'rgb{pos_rgb}'
     neg_color = f'rgb{neg_rgb}'
     color = neg_color if val < 0 else pos_color
     return f'color: {color};'
+
+def format_float_as_currency_change(value):
+    sign = '+' if value > 0 else '-' if value < 0 else ''
+    return f"$ {sign}{abs(value):,.2f}"
+
+def color_net_profit(val, pos_rgb=(0, 128, 0), neg_rgb=(255, 0, 0)):
+    pos_color = f'rgb{pos_rgb}'
+    neg_color = f'rgb{neg_rgb}'
+    color = neg_color if '-' in val else pos_color
+    return f'color: {color}'
