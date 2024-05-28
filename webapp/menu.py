@@ -3,10 +3,11 @@ import streamlit as st
 
 def authenticated_menu():
     # Show a navigation menu for authenticated users
-    st.sidebar.page_link("app.py", label="Switch accounts")
+    # st.sidebar.page_link("app.py", label="Switch accounts")
     if st.session_state.role in ["user"]:
-        st.sidebar.page_link("pages/user_overview.py", label="Overview")
-        st.sidebar.page_link("pages/user_data.py", label="Account History")
+        st.sidebar.page_link("pages/user_live.py", label="Live")
+        st.sidebar.page_link("pages/user_overview.py", label="Summary")
+        st.sidebar.page_link("pages/user_data.py", label="History")
         st.sidebar.page_link("pages/user_settings.py", label="Settings")
     if st.session_state.role in ["admin"]:
         st.sidebar.page_link("pages/admin.py", label="Manage users")

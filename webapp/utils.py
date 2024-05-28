@@ -5,6 +5,34 @@ import os
 import json
 import re
 
+pos_rgb=(0, 230, 128)
+neg_rgb=(255, 0, 82)
+
+color_lookup = [(255,7,82),(254,23,83),(253,36,83),(251,46,84),(250,53,85),(249,60,86),(247,66,86),(246,72,87),(244,77,88),(243,82,88),(241,86,89),(240,90,90),(238,95,91),(237,99,91),(235,102,92),(234,106,93),(232,110,93),(230,113,94),(229,117,95),(227,120,96),(225,123,96),(223,126,97),(221,129,98),(219,132,98),(217,135,99),(215,138,100),(213,141,101),(211,144,101),(209,147,102),(207,149,103),(204,152,103),(202,155,104),(199,158,105),(197,160,106),(194,163,106),(192,165,107),(189,168,108),(186,170,109),(183,173,109),(181,175,110),(177,178,111),(174,180,112),(171,183,112),(168,185,113),(164,187,114),(161,190,115),(157,192,115),(153,194,116),(149,197,117),(144,199,118),(140,201,118),(135,204,119),(130,206,120),(125,208,120),(119,210,121),(113,213,122),(106,215,123),(99,217,123),(91,219,124),(82,221,125),(71,224,126),(58,226,126),(39,228,127),(13,230,128)]
+
+def load_header(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        # print("File encoding: utf-8")
+        tsv_string = file.read()
+    
+    # Split the string by the custom header separator and take the first part
+    split_tsv = tsv_string.split("|+|")
+    
+    tsv_header = split_tsv[0]
+
+    pairs = [x for x in tsv_header.split("|") if x != '']
+
+    kv = [x.split(":") for x in pairs]
+
+    d = {}
+    for k, v in kv:
+        d[k] = v
+    
+    d['account_equity'] = float(d['account_equity'])
+    d['account_balance'] = float(d['account_balance'])
+    
+    return d
+
 def load_data(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         # print("File encoding: utf-8")
@@ -132,6 +160,14 @@ def calculate_net_profit_sum(filtered_df):
     """Calculate the sum of net profits for a given trade group."""
     return filtered_df['NetProfit'].sum()
 
+def calculate_net_swaps_sum(filtered_df):
+    """Calculate the sum of swaps for a given trade group."""
+    return filtered_df['Swap'].sum()
+
+def calculate_net_commissions_sum(filtered_df):
+    """Calculate the sum of commissions for a given trade group."""
+    return filtered_df['Commission'].sum()
+
 def calculate_positive_net_profit_sum(filtered_df):
     """Calculate the sum of positive net profits for a given trade group."""
     return filtered_df['NetProfit'].clip(lower=0).sum()
@@ -149,19 +185,61 @@ def format_profit_factor(val):
     # format the profit factor with 2 decimal places. if the value is 99999, then return the symbol for infinity
     return '∞' if val == 99999 else f'{val:.2f}'
 
-def color_net_profit(val, pos_rgb=(0, 255, 128), neg_rgb=(255, 0, 128)):
+def color_net_profit(val):
     """Apply color formatting based on the value."""
+    # pos_rgb=(0, 230, 128)
+    # neg_rgb=(255, 0, 82)
     pos_color = f'rgb{pos_rgb}'
     neg_color = f'rgb{neg_rgb}'
-    color = neg_color if val < 0 else pos_color
+
+    # Remove the dollar sign and comma, then convert to float
+    val_float = float(val.replace('$', '').replace(',', ''))
+
+    if val_float < 0:
+        color = neg_color
+    elif val_float > 0:
+        color = pos_color
+    else:
+        return ''
     return f'color: {color};'
+
+def color_profit_factor(val):
+    # using the color lookup which has a gradeitn of 64 colors, we can color the profit factor
+    # if the profit factor is the infinity symbol, automatically consider that the last color in the gradient
+    # otherwise, values will map from 0-3 of the profit factor to 0-63 of the gradient
+    if val == '∞':
+        color = f'color: rgb{color_lookup[-1]};'
+        # print(color)
+        return color
+    else:
+        val = float(val)
+        val = min(val, 3)
+        color_index = int((val/3) * 63)
+        return f'color: rgb{color_lookup[color_index]};'
 
 def format_float_as_currency_change(value):
     sign = '+' if value > 0 else '-' if value < 0 else ''
     return f"$ {sign}{abs(value):,.2f}"
 
-def color_net_profit(val, pos_rgb=(0, 128, 0), neg_rgb=(255, 0, 0)):
-    pos_color = f'rgb{pos_rgb}'
-    neg_color = f'rgb{neg_rgb}'
-    color = neg_color if '-' in val else pos_color
-    return f'color: {color}'
+def format_float_as_currency_change_no_prefix(value):
+    sign = '+' if value > 0 else '-' if value < 0 else ''
+    return f"{sign}{abs(value):,.2f}"
+
+def format_float_as_currency_change_alt(value):
+    sign = '+' if value > 0 else '-' if value < 0 else ''
+    return f"{sign} ${abs(value):,.2f}"
+
+def format_float_as_percent_change(value):
+    sign = '+' if value > 0 else '-' if value < 0 else ''
+    return f"{sign}{abs(value):,.2f}%"
+
+def format_float_as_percent_change_sans_percent(value):
+    sign = '+' if value > 0 else '-' if value < 0 else ''
+    return f"{sign}{abs(value):,.2f}"
+
+def format_float_as_currency(value):
+    return f"$ {value:,.2f}"
+
+def color_neutral_row(row, column_name):
+    color = 'color: dimgray' if row[column_name] == 0 else ''
+    return [color] * len(row)

@@ -1,5 +1,5 @@
 {
-    "inial-balance": 5000,
+    "initial-balance": 5000,
     "start-date": "2024-05-13 00:00:00",
     "end-date": "2024-12-31 23:59:59",
     "trade-groups": [
