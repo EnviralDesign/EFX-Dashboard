@@ -4,3 +4,5 @@
 /webapp/.git
 /webapp/.gitignore
 .aider*
+/webapp/build
+/webapp/dist

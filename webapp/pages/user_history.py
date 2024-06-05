@@ -18,7 +18,7 @@ st.write("View and filter your raw account history.")
 # get some data
 config = load_config()
 initial_balance = config['initial-balance']
-df = load_data('./data/data.tsv')
+df = load_data(config['path-to-trade-history'])
 start_date, end_date = start_and_end_dates(df, config['start-date'], config['end-date'])
 comment_filter, magic_filter = comment_and_magic_filter_strings()
 

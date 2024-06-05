@@ -22,7 +22,7 @@ st.write("Trade history for the given period clustered by trade group.")
 # get some data
 config = load_config()
 initial_balance = config['initial-balance']
-df = load_data('./data/data.tsv')
+df = load_data(config['path-to-trade-history'])
 start_date, end_date = start_and_end_dates(df, config['start-date'], config['end-date'])
 
 # calculate the net profit up to the start date
