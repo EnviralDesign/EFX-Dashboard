@@ -3,6 +3,15 @@ from menu import menu
 
 st.set_page_config(layout="wide")  # Set the page layout to wide
 
+hide_st_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;} I
+                </style>
+                """
+
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 # Initialize st.session_state.role to None
 if "role" not in st.session_state:
     st.session_state.role = None

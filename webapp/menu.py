@@ -1,5 +1,10 @@
 import streamlit as st
 
+def read_version():
+    with open("data/version.txt") as f:
+        return f.read().strip()
+
+__version__ = read_version()
 
 def authenticated_menu():
     # Show a navigation menu for authenticated users
@@ -19,6 +24,10 @@ def unauthenticated_menu():
 
 
 def menu():
+
+    # st.sidebar.markdown(f"**Version: {__version__}**")
+    st.sidebar.header(f"**:blue[EFX Dashboard] :gray[v{__version__}]**")
+
     # Determine if a user is logged in or not, then show the correct
     # navigation menu
     if "role" not in st.session_state or st.session_state.role is None:

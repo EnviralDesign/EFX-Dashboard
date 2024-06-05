@@ -11,7 +11,7 @@ menu_with_redirect()
 
 # st.title("Overview")
 # st.header(':violet[Overview]', divider='rainbow')
-st.header('Summary', divider='rainbow')
+st.header('Summary', divider='blue')
 st.write("Trade history for the given period clustered by trade group.")
 # st.header(':orange[Overview]', divider='orange')
 # st.header(':blue[Overview]', divider='grey')

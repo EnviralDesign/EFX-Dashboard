@@ -5,6 +5,8 @@ import io
 import os
 import json
 import re
+from pathlib import Path
+import sys
 
 pos_rgb=(0, 230, 128)
 neg_rgb=(255, 0, 82)
@@ -277,3 +279,15 @@ def format_float_as_currency(value):
 def color_neutral_row(row, column_name):
     color = 'color: dimgray' if row[column_name] == 0 else ''
     return [color] * len(row)
+
+
+# def get_resource_path(resource_path):
+
+#     if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+#         bundle_dir = Path(sys._MEIPASS)
+#     else:
+#         bundle_dir = Path(__file__).parent
+
+#     path_to_dat = Path.cwd() / bundle_dir / resource_path
+
+#     return path_to_dat
