@@ -252,6 +252,46 @@
             "title": "VISI PROP EA v1.0",
             "comment-filter": "VISI PROP EA(OHLC IMPROVED V3)",
             "magic-filter": ""
+        },
+        {
+            "title": "cm-matematik v1.0",
+            "comment-filter": "",
+            "magic-filter": "55669784"
+        },
+        {
+            "title": "Bankomat v4.8",
+            "comment-filter": "*Tek*",
+            "magic-filter": ""
+        },
+        {
+            "title": "cm-Velosity-12-T",
+            "comment-filter": "",
+            "magic-filter": "4235349"
+        },
+        {
+            "title": "Funny EA Smart Profit",
+            "comment-filter": "Smart Profit Funny EA",
+            "magic-filter": ""
+        },
+        {
+            "title": "Wall Street US30",
+            "comment-filter": "*Wall Street US30*",
+            "magic-filter": ""
+        },
+        {
+            "title": "cm EA_NET",
+            "comment-filter": "*EA_NET*",
+            "magic-filter": ""
+        },
+        {
+            "title": "cm RUL",
+            "comment-filter": "",
+            "magic-filter": "56987345"
+        },
+        {
+            "title": "cm BB",
+            "comment-filter": "",
+            "magic-filter": "3409873"
         }
     ]
 }

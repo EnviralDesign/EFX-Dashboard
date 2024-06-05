@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import io
 import os
 import json
@@ -155,6 +156,24 @@ def load_config():
         config['start-date'] = pd.to_datetime(config['start-date'])
         config['end-date'] = pd.to_datetime(config['end-date'])
         return config
+    
+def calculate_max_dd(filtered_df, initial_balance):
+    # Define a function that will be applied to each value in the 'HourlyDrawdown' column
+    def get_min_value(comma_separated_str):
+        float_values = list(map(float, comma_separated_str.split(',')))
+        min_value = min(float_values)
+
+        dd_percent = (min_value / initial_balance) * 100
+        return dd_percent
+
+    # Apply the function to the 'HourlyDrawdown' column
+    filtered_df['MaxDD'] = filtered_df['HourlyDrawdown'].apply(get_min_value)
+    
+    result = filtered_df['MaxDD'].min()
+    
+    if np.isnan(result):
+        return 0
+    return filtered_df['MaxDD'].min()
 
 def calculate_net_profit_sum(filtered_df):
     """Calculate the sum of net profits for a given trade group."""
@@ -216,6 +235,21 @@ def color_profit_factor(val):
         val = min(val, 3)
         color_index = int((val/3) * 63)
         return f'color: rgb{color_lookup[color_index]};'
+
+def color_drawdown_factor(val):
+    # using the color lookup which has a gradeitn of 64 colors, we can color the profit factor
+    # if the profit factor is the infinity symbol, automatically consider that the last color in the gradient
+    # otherwise, values will map from 0-3 of the profit factor to 0-63 of the gradient
+
+    val = abs(float(val))
+    range_ = 10
+    
+    val = min(val, range_)
+    val = range_ - val
+    
+    # return ""
+    color_index = int((val/range_) * 63)
+    return f'color: rgb{color_lookup[color_index]};'
 
 def format_float_as_currency_change(value):
     sign = '+' if value > 0 else '-' if value < 0 else ''

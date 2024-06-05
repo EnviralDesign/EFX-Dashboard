@@ -1,7 +1,7 @@
 import streamlit as st
 from menu import menu_with_redirect
 import pandas as pd
-from utils import load_config, load_data, calculate_net_profit_sum, filter_dataframe, start_and_end_dates, format_float_as_currency_change, color_net_profit, calculate_positive_net_profit_sum, calculate_negative_net_profit_sum, calculate_profit_factor, format_profit_factor, color_profit_factor, color_neutral_row, calculate_net_swaps_sum, calculate_net_commissions_sum, format_float_as_currency, format_float_as_currency_change_alt, format_float_as_percent_change, format_float_as_percent_change_sans_percent, format_float_as_currency_change_no_prefix
+from utils import load_config, load_data, calculate_net_profit_sum, filter_dataframe, start_and_end_dates, format_float_as_currency_change, color_net_profit, calculate_positive_net_profit_sum, calculate_negative_net_profit_sum, calculate_profit_factor, format_profit_factor, color_profit_factor, color_neutral_row, calculate_net_swaps_sum, calculate_net_commissions_sum, format_float_as_currency, format_float_as_currency_change_alt, format_float_as_percent_change, format_float_as_percent_change_sans_percent, format_float_as_currency_change_no_prefix, calculate_max_dd, color_drawdown_factor
 from datetime import datetime, timedelta
 
 
@@ -54,9 +54,11 @@ for group in config['trade-groups']:
     swaps_sum_formatted = format_float_as_currency_change_no_prefix(swaps_sum)
     comission_sum = calculate_net_commissions_sum(filtered_df)
     comission_sum_formatted = format_float_as_currency_change_no_prefix(comission_sum)
+    max_dd = calculate_max_dd(filtered_df, initial_balance)
+    max_dd_formatted = format_float_as_currency_change_no_prefix(max_dd)
 
     pl_percent = (net_profit_sum / balance_right_before_start_date) * 100
-    net_profit_percentage = format_float_as_percent_change_sans_percent(pl_percent)
+    net_profit_percentage = format_float_as_currency_change_no_prefix(pl_percent)
     
     data = {
         'Title': title, 
@@ -65,6 +67,7 @@ for group in config['trade-groups']:
         '$ Profit': profit_sum_formatted,
         '$ Loss': loss_sum_formatted,
         'PF': profit_factor_formatted,
+        '% Max DD': max_dd_formatted,
         '# Trades': len(filtered_df),
         '# Longs': len(filtered_df[filtered_df['Type'] == 'OP_BUY']),
         '# Shorts': len(filtered_df[filtered_df['Type'] == 'OP_SELL']),
@@ -108,6 +111,7 @@ with st.container():
                 .map(lambda val: color_net_profit(val), subset=['$ P/L'])
                 .map(lambda val: color_net_profit(val), subset=['% P/L'])
                 .map(lambda val: color_profit_factor(val), subset=['PF'])
+                .map(lambda val: color_drawdown_factor(val), subset=['% Max DD'])
                 # .map(lambda val: color_net_profit(val), subset=['Swaps'])
                 # .map(lambda val: color_net_profit(val), subset=['Commissions'])
                 .apply(color_neutral_row, args=('# Trades',), axis=1)
