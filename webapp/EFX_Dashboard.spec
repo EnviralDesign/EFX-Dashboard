@@ -13,34 +13,49 @@ __version__ = read_version()
 
 a = Analysis(
     ['EFX_Dashboard.py'],
-    pathex=[],
+    pathex=[os.path.abspath(".")],
     binaries=[],
     datas=[
+        (
+            "C:/repos/EFX-Dashboard/.venv/Lib/site-packages/altair/vegalite/v5/schema/vega-lite-schema.json",
+            "./altair/vegalite/v4/schema/"
+        ),
+        (
+            "C:/repos/EFX-Dashboard/.venv/Lib/site-packages/streamlit/static",
+            "./streamlit/static"
+        ),
+        (
+            "C:/repos/EFX-Dashboard/.venv/Lib/site-packages/streamlit/runtime",
+            "./streamlit/runtime"
+        ),
         ('app.py', '.'),
         ('utils.py', '.'),
         ('menu.py', '.'),
         ('pages/*', 'pages'),
     ],
     hiddenimports=['streamlit'],
-    hookspath=[os.path.abspath("hooks")],
+    hookspath=["C:/repos/EFX-Dashboard/webapp/hooks"],
     hooksconfig={},
     runtime_hooks=[],
     excludes=[],
     noarchive=False,
-    optimize=0,
 )
+
 pyz = PYZ(a.pure)
 
 exe = EXE(
     pyz,
     a.scripts,
+    a.binaries,
+    a.datas,
     [],
-    exclude_binaries=True,
     name='EFX_Dashboard',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
+    upx_exclude=[],
+    runtime_tmpdir=None,
     console=True,
     disable_windowed_traceback=False,
     argv_emulation=False,
@@ -48,19 +63,10 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
 )
-coll = COLLECT(
-    exe,
-    a.binaries,
-    a.datas,
-    strip=False,
-    upx=True,
-    upx_exclude=[],
-    name='EFX_Dashboard',
-)
 
 # Post-processing hook to copy additional files or folders
 def copy_additional_files():
-    dist_dir = os.path.join(os.getcwd(), 'dist', f"EFX_Dashboard")
+    dist_dir = os.path.join(os.getcwd(), 'dist')
     
     # Define the zip filename
     temp_zip_filename = f"EFX_Dashboard_{__version__}.zip"
@@ -86,13 +92,17 @@ def copy_additional_files():
             shutil.copy(src, dst)
 
     # Create a zip file of the dist directory
+    temp_zip_filepath = os.path.join(os.getcwd(), temp_zip_filename)
     final_zip_filepath = os.path.join(os.getcwd(), 'dist', temp_zip_filename)
 
-    with zipfile.ZipFile(final_zip_filepath, 'w', zipfile.ZIP_DEFLATED) as zipf:
+    with zipfile.ZipFile(temp_zip_filepath, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for root, dirs, files in os.walk(dist_dir):
             for file in files:
                 file_path = os.path.join(root, file)
                 zipf.write(file_path, os.path.relpath(file_path, dist_dir))
+
+    # Move the zip file to the dist directory
+    shutil.move(temp_zip_filepath, final_zip_filepath)
 
 # Call the post-processing function
 copy_additional_files()
