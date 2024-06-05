@@ -20,12 +20,12 @@ def set_role():
 
 
 # Selectbox to choose role
-st.selectbox(
-    "Select your role:",
-    [None, "user", "admin"],
-    key="_role",
-    on_change=set_role,
-)
+# st.selectbox(
+#     "Select your role:",
+#     [None, "user", "admin"],
+#     key="_role",
+#     on_change=set_role,
+# )
 
 menu() # Render the dynamic menu!
 
