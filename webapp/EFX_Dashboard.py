@@ -20,15 +20,15 @@ def main():
     __version__ = read_version()
 
     # Get the absolute path to the directory containing the executable
-    # if getattr(sys, 'frozen', False):
-    #     # If the application is run as a bundle, the PyInstaller bootloader
-    #     # exposes this attribute and the value is the absolute path to the bundle
-    #     base_path = sys._MEIPASS
-    # else:
-    #     base_path = os.path.abspath(".")
+    if getattr(sys, 'frozen', False):
+        # If the application is run as a bundle, the PyInstaller bootloader
+        # exposes this attribute and the value is the absolute path to the bundle
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(".")
 
     # Path to your Streamlit app
-    # app_path = os.path.join(base_path, 'app.py')
+    app_path = os.path.join(base_path, 'app.py')
 
     # # Ensure streamlit is available
     # streamlit_executable = shutil.which("streamlit")
@@ -44,9 +44,10 @@ def main():
     print("#############################################")
 
     # Run the Streamlit app
-    # subprocess.run(["streamlit", "run", app_path])
+    subprocess.run(["streamlit", "run", app_path])
 
-    cli._main_run_clExplicit('app.py', 'streamlit run')
+    # cli._main_run_clExplicit(app_path, 'streamlit run')
+    # cli._main_run_clExplicit('app.py', 'streamlit run')
 
 if __name__ == "__main__":
     main()

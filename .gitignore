@@ -6,3 +6,4 @@
 .aider*
 /webapp/build
 /webapp/dist
+/streamlit_test/node_modules
