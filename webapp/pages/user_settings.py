@@ -1,11 +1,12 @@
 import streamlit as st
-from menu import menu_with_redirect
+from menu import side_menu
 from streamlit_ace import st_ace
 import json
 import os
 
 # Redirect to app.py if not logged in, otherwise show the navigation menu
-menu_with_redirect()
+# menu_with_redirect()
+side_menu()
 
 st.header('Settings', divider='grey')
 st.markdown(f"Configure your settings here.")

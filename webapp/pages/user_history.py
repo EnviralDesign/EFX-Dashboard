@@ -1,13 +1,14 @@
 import streamlit as st
 import pandas as pd
 import traceback
-from menu import menu_with_redirect
+from menu import side_menu
 from datetime import datetime, timedelta, date
 from utils import load_config, load_data, calculate_net_profit_sum, filter_dataframe, start_and_end_dates, comment_and_magic_filter_strings, format_float_as_currency_change, format_float_as_currency, format_float_as_currency_change_alt, calculate_net_swaps_sum, calculate_net_commissions_sum, format_float_as_percent_change
 
 
 # Redirect to app.py if not logged in, otherwise show the navigation menu
-menu_with_redirect()
+# menu_with_redirect()
+side_menu()
 
 
 # st.title("Account History")

@@ -1,5 +1,5 @@
 import streamlit as st
-from menu import menu
+from menu import side_menu
 import sys
 
 st.set_page_config(layout="wide")  # Set the page layout to wide
@@ -23,6 +23,8 @@ st.set_page_config(layout="wide")  # Set the page layout to wide
 #     for file in files:
 #         st.write(os.path.join(root, file))
 
+# st.session_state['role'] = "user"
+
 # Initialize st.session_state.role to None
 if "role" not in st.session_state:
     st.session_state.role = None
@@ -32,11 +34,11 @@ if st.session_state.role is None:
     st.session_state.role = "user"
 
 # Retrieve the role from Session State to initialize the widget
-st.session_state._role = st.session_state.role
+# st.session_state._role = st.session_state.role
 
-def set_role():
-    # Callback function to save the role selection to Session State
-    st.session_state.role = st.session_state._role
+# def set_role():
+#     # Callback function to save the role selection to Session State
+#     st.session_state.role = st.session_state._role
 
 
 # Selectbox to choose role
@@ -47,6 +49,9 @@ def set_role():
 #     on_change=set_role,
 # )
 
-menu() # Render the dynamic menu!
+side_menu() # Render the dynamic menu!
 
-# st.title("Hello World!")
+
+
+st.title("Welcome to the EFX Dashboard")
+st.write("Use the Navigation Menu to the left to navigate to the desired page. It's a good idea to start in Settings and configure your app.")
