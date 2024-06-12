@@ -7,3 +7,5 @@
 /webapp/build
 /webapp/dist
 /streamlit_test/node_modules
+/__archive__
+/webapp/node_modules
