@@ -22,8 +22,10 @@
       "target": "portable"
     }
   },
+  "description": "An Electron application wrapper of the EnviralFX Dashboard app built in streamlit",
+  "author": "EnviralFX (Lucas Morgan)",
   "devDependencies": {
-    "@stlite/desktop": "^0.58.3",
+    "@stlite/desktop": "^0.58.6",
     "cross-env": "^7.0.3",
     "electron": "30.0.8",
     "electron-builder": "^24.13.3"
