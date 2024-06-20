@@ -11,3 +11,5 @@
 /webapp/node_modules
 /tdapp/Backup
 tdapp/EFX-Dashboard.*.toe
+/tdapp/.py
+/tdapp/data/eb89ad51658a02be20b0c670b114a689b4dfc44587370596f53280fb73e2e998
