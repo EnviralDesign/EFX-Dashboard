@@ -101,9 +101,9 @@ This filter field supports multiple entries, each entry is separated by a semico
 
 Each filter item uses partial pattern matching if you wish, or you can specify the exact comment.
 
-the default value of `canceled;bc;` actually means the following patterns will be excluded:
+the default value of `cancelled;bc;` actually means the following patterns will be excluded:
 
-- canceled
+- cancelled
 - bc
 
 keep in mind, you do not HAVE to exclude anything, but things you exclude by way of this filter will never leave the mt4 terminal.
