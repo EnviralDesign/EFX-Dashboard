@@ -56,7 +56,7 @@ You should see a window like this.
 
 Get the latest release from the releases area on this github page, or just download the zip file here:
 
-https://github.com/EnviralDesign/EFX-Dashboard/releases/download/v0.1.0/efx.dashboard.build.549.zip
+https://github.com/EnviralDesign/EFX-Dashboard/releases/download/v0.1.1/efx.dashboard.build.550.zip
 
 Unzip the archive, and place the folder somewhere you prefer. I use c:/efxdash etc.
 
