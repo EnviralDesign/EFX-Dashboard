@@ -1,5 +1,7 @@
 # EFX-Dashboard
 
+> For support, chat, community etc: [Enviral-FX Website / Telegram](https://www.enviral-fx.com/)
+
 A desktop application for tracking and aggregating the performance of your MetaTrader 4 Expert Advisors.
 
 EFX Dashboard digests raw TSV data from metatrader 4, and displays statistics about it. 
