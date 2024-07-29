@@ -56,7 +56,7 @@ You should see a window like this.
 
 Get the latest release from the releases area on this github page, or just download the zip file here:
 
-https://github.com/EnviralDesign/EFX-Dashboard/releases/download/v0.1.1/efx.dashboard.build.550.zip
+https://github.com/EnviralDesign/EFX-Dashboard/releases/download/v0.1.2/efx.dashboard.build.565.zip
 
 Unzip the archive, and place the folder somewhere you prefer. I use c:/efxdash etc.
 
@@ -68,7 +68,7 @@ Simply drag EFX Dashboard onto TouchPlayer, or right click and open with TouchPl
 
 Eventually EFX Dashboard will open, and you'll see a window like this:
 
-![alt text](./media/image-7.png)
+![alt text](./media/image-92.png)
 
 ### 5) EFX Publisher Installation
 
