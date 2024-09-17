@@ -56,7 +56,7 @@ You should see a window like this.
 
 Get the latest release from the releases area on this github page, or just download the zip file here:
 
-https://github.com/EnviralDesign/EFX-Dashboard/releases/download/v0.1.6/efx.dashboard.build.590.zip
+https://github.com/EnviralDesign/EFX-Dashboard/releases/download/v0.1.7/efx.dashboard.build.591.zip
 
 Unzip the archive, and place the folder somewhere you prefer. I use c:/efxdash etc.
 
@@ -76,7 +76,7 @@ EFX Dashboard is nothing with out a data source. Next we'll setup EFX Publisher 
 
 Open up your data folder from metatrader 4, and navigate into the Experts Directory.
 
-Copy `EFX-Account-Publisher-EA-1.2.ex4` into this directory.
+Copy `EFX-Account-Publisher-EA-1.2.3.ex4` into this directory.
 
 ![alt text](./media/image-8.png)
 
