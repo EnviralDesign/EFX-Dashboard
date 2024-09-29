@@ -54,9 +54,7 @@ You should see a window like this.
 
 ### 3) Download EFX Dashboard & Publisher
 
-Get the latest release from the releases area on this github page, or just download the zip file here:
-
-https://github.com/EnviralDesign/EFX-Dashboard/releases/download/v0.1.7/efx.dashboard.build.591.zip
+Get the latest zip file release from the releases area on this github page, or just download the zip file from this page.
 
 Unzip the archive, and place the folder somewhere you prefer. I use c:/efxdash etc.
 
@@ -76,7 +74,7 @@ EFX Dashboard is nothing with out a data source. Next we'll setup EFX Publisher 
 
 Open up your data folder from metatrader 4, and navigate into the Experts Directory.
 
-Copy `EFX-Account-Publisher-EA-1.2.3.ex4` into this directory.
+Copy `EFX-Account-Publisher-EA-x.y.z.ex4` into this directory.
 
 ![alt text](./media/image-8.png)
 
@@ -194,11 +192,11 @@ similarly, you will need a valid API key for the server to accepts your requests
 
 How many miliseconds to wait for a response from the server before timing out. If you are dealing with very large amounts of historical trading data, you may need to increase this value.
 
-#### Trade Group [1-50] Settings
+#### Trade Group [1-75] Settings
 
 ![alt text](./media/image-22.png)
 
-There are 50 entries for trade groups, which means you can specify up to 50 different EA's or trade groups to be published. Each trade group has the following parameters:
+There are 75 entries for trade groups, which means you can specify up to 75 different EA's or trade groups to be published. Each trade group has the following parameters:
 
 - Title
 - Comment Filter
