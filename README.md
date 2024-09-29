@@ -54,9 +54,9 @@ You should see a window like this.
 
 ### 3) Download EFX Dashboard & Publisher
 
-Get the latest zip file release from the releases area on this github page, or just download the zip file from this page.
+Get the latest zip file release from the [releases area](https://github.com/EnviralDesign/EFX-Dashboard/releases). This includes python and all other dependancies needed to run the dashboard. Downloading the zip file from the main branch will not include those python dependancies and thus the system will not work. However if you are just getting an updated toe file or ex4 file, you can simply download them from the repo and overwrite yours. 
 
-Unzip the archive, and place the folder somewhere you prefer. I use c:/efxdash etc.
+Be sure to check the release notes, if I change python dependancies I will try to make note of that.
 
 ### 4) Launch EFX Dashboard
 
